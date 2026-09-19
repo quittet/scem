@@ -1,0 +1,8 @@
+dist/
+*.tar
+*.tar.gz
+__pycache__/
+*.pyc
+*.mo
+emailpass.txt
+privepass.txt

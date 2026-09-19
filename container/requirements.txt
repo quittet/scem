@@ -1,0 +1,14 @@
+# Dépendances figées pour epater (commit voir epater/UPSTREAM_COMMIT).
+# Les 7 premières lignes reprennent epater/requirements.txt à l'identique.
+beautifulsoup4==4.8.2
+bottle==0.12.18
+bs4==0.0.1
+gevent==1.4.0
+greenlet==0.4.15
+ply==3.11
+websockets==8.1
+# Ajout scem : génération des catalogues i18n (.mo) au build.
+# uvloop est volontairement absent : mainweb.py crée le serveur websocket avant
+# de changer de boucle événementielle, ce qui plante avec websockets 8.1
+# ("got Future attached to a different loop").
+polib==1.1.1

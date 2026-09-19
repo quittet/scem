@@ -1,0 +1,14 @@
+services:
+  epater:
+    image: scem/epater:latest
+    build: .
+    container_name: epater
+    restart: unless-stopped
+    ports:
+      # Le front (interface/static/js/comm.js) ouvre ws://<hote>:31415/ :
+      # le port websocket doit être publié tel quel, sans renumérotation.
+      - "8000:8000"
+      - "31415:31415"
+    volumes:
+      # Exercices (fichiers HTML avec les div enonce/code/solution). Optionnel.
+      - ./exercices:/app/epater/exercices:ro
