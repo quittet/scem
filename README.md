@@ -1,6 +1,6 @@
-# scem — epater cryogénisé
+# scem — Simuler c'est mal
 
-**scem** empaquette [epater](https://github.com/mgard/epater), le simulateur
+**scem** cryogenise [epater](https://github.com/mgard/epater), le simulateur
 ARM web pédagogique, dans une image Docker autonome. Objectif : le déployer
 sur n'importe quel Linux, aujourd'hui ou dans dix ans, sans se soucier des
 versions de Python ni des dépendances.
@@ -48,21 +48,6 @@ make run
 
 L'archive contient l'image complète (Python 3.7, dépendances, sources). Elle
 ne dépend d'aucun réseau ni d'aucun dépôt PyPI pour être relancée.
-
-## Choix techniques
-
-- **Python 3.7** : dernière version pour laquelle toutes les dépendances
-  épinglées par upstream (gevent 1.4.0, websockets 8.1, greenlet 0.4.15) ont
-  des roues binaires. Monter de version oblige à revalider tout le simulateur.
-- **Pas d'uvloop** : upstream le recommande, mais `mainweb.py` crée le serveur
-  websocket avant de changer de boucle événementielle, ce qui plante avec
-  websockets 8.1 (« got Future attached to a different loop »).
-- **Mode non DEBUG** : hors DEBUG, epater tente d'envoyer les plantages par
-  courriel seulement si `emailpass.txt` existe, ce qui n'est pas le cas dans
-  l'image. Pour activer le mode privé, monter un `privepass.txt` dans
-  `/app/epater/`.
-- **Sources vendorisées** plutôt qu'un sous-module git : la reconstruction de
-  l'image ne dépend pas de la disponibilité de GitHub.
 
 ## Mettre à jour epater
 
