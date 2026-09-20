@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Addition</h1>
+<ol>
+<li>Affectez la valeur <code>0x08</code> à <code>R0</code>;</li>
+<li>Affectez la valeur <code>0x0F</code> à <code>R1</code>;</li>
+<li>Remplaçez <code>R0</code> par le négatif de sa valeur;</li>
+<li>Additionnez <code>R0</code> et <code>R1</code> et stockez le résultat dans <code>R2</code>.</li>
+</ol>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+MOV R0, #0x08
+MOV R1, #0x0F
+RSB R0, R0, #0 
+ADD R2, R0, R1
+
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+
+
+</div>
+</body>
+</html>

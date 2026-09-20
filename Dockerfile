@@ -20,6 +20,10 @@ RUN pip install -r /app/container/requirements.txt
 COPY epater /app/epater
 COPY container /app/container
 
+# Personnalisations locales appliquées par-dessus les sources upstream
+# (voir container/overlay/README.md).
+COPY container/overlay /app/epater
+
 # Catalogues de traduction (.mo), ignorés par git côté upstream.
 RUN cd /app/epater && python utils/po2mo.py
 

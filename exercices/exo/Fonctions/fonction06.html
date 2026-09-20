@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Factorielle</h1>
+<p>Développez la fonction <code>Factorielle</code> qui calcule la factorielle d'un nombre placé dans <code>R0</code> et qui retourne le résultat dans <code>R1</code>. </p>
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+LDR SP, =maPile
+ADD SP, SP, #40
+
+; valeurs de test: essayons de calculer 3! (3 x 2 x 1)
+MOV R0, #3
+
+; appel de la fonction Factorielle
+BL Factorielle
+
+fin
+B fin
+
+Factorielle
+; Écrivez votre code ici
+BX LR
+
+
+SECTION DATA
+maPile ALLOC32 10
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+LDR SP, =maPile
+ADD SP, SP, #40
+
+; valeurs de test: essayons de calculer 3! (3 x 2 x 1)
+MOV R0, #3
+
+; appel de la fonction Factorielle
+BL Factorielle
+
+fin
+B fin
+
+Factorielle
+; Écrivez votre code ici
+
+MOV R1, #1
+
+boucle
+
+CMP R0, #0
+BEQ finBoucle
+MUL R1, R1, R0
+SUB R0, R0, #1
+B boucle
+
+finBoucle
+BX LR
+
+
+SECTION DATA
+maPile ALLOC32 10
+</pre>
+
+</div>
+</body>
+</html>

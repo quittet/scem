@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Tableaux</h1>
+<p>Écrivons un programme qui copie le contenu d'un tableau <code>source</code> vers un tableau <code>destination</code>.</p>
+</div>
+<div id="code"> 
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main    
+
+  
+fin
+B fin
+
+SECTION DATA
+
+; Valeurs stockées en mémoire
+
+; Résultat (on ne connait pas sa valeur a priori)
+
+</div>
+
+<div id="solution"> 
+<p>Questions et réponses: </p>
+<ul>
+<li>Quelle est l'adresse de <code>source</code>? L'adresse de <code>source</code> est 0x1000. </li>
+<li>Quelle est l'adresse de <code>destination</code>? L'adresse de <code>destination</code> est 0x100C. </li>
+<li>Pouvons-nous faire des copies mémoire-mémoire? Non, il n'existe pas d'instructions pour effectuer cette opération. Il faut donc passer par les registres du micro-processeur. </li>
+<li>Combien d'octets faut-il rajouter à l'adresse? Comme chaque élément dans le tableau occupe 32 bits, il faut rajouter 4 octets (rappel: 1 octet = 8 bits) pour passer au prochain élément. </li>
+</ul>
+
+</div>
+</body>
+</html>

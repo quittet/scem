@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Manipulation de PC</h1>
+<p>À la fin de ce code, ajoutez une seule instruction pour qu'il devienne un compteur sur <code>R0</code>, c’est-à-dire que l’incrémentation (l'opération <code>ADD R0, R0, R1</code>) s’effectue en boucle infinie.</p>
+<p>Pour cet exercice, n'ajoutez pas de libellés mais effectuez plutôt une opération sur le registre <code>PC</code>.</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+MOV R1, #0x01
+ADD R0, R0, R1 
+MOV PC, #0x84
+
+SECTION DATA
+</pre>
+
+</div>
+</body>
+</html>

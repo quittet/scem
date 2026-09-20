@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Chaînes de caractères</h1>
+<p>Écrivons un programme pour comparer des éléments de deux chaînes de caractères.</p>
+</div>
+
+<div id="code">SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+
+; Chargeons l'adresse de chA
+LDR R0, =chA
+
+; Si l'on tente de charger le premier caractère avec LDR, on charge 32 bits!
+; Ce qui correspond aux _4_ premiers caractères...
+LDR R1, [R0]
+
+; Pour charger un caractère à la fois, on peut utiliser LDRB (LDR Byte), 
+; ce qui charge un seul octet (byte).
+LDRB R1, [R0]
+
+; Question: Pour lire le caractère suivant dans la chaîne, il faudrait
+; incrémenter R0 de combien?
+LDRB R1, [R0, #1]
+
+; Est-ce que les deux chaînes sont bien équivalentes?
+; Comparons le deuxième caractère par exemple (à vous de comparer les autres)
+LDR R3, =chB
+LDRB R2, [R3, #1]
+
+; R3 (2e caractère de chB) est bel et bien égal à R1 (2e caractère de chA)
+
+fin
+B fin
+
+
+SECTION DATA
+
+; Définissons une chaîne binaire
+chA ASSIGN8 "Hello", 0
+
+; Définissons la même chaîne de caractères, en code binaire ASCII cette fois
+chB ASSIGN8 0x48, 0x65, 0x6C, 0x6C, 0x6F, 0x00 
+
+</div>
+
+<div id="solution"> 
+<h1> Solution </h1>
+<p>Questions et réponses: </p>
+<ul>
+<li>Pour lire le caractère suivant dans la chaîne, il faudrait incrémenter R0 de combien? 1 octet (chaque caractère occupe 1 octet en ASCII). </li>
+</ul>
+</div>
+</body>
+</html>

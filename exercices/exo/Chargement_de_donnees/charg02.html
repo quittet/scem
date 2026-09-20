@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Écriture en mémoire</h1>
+<p>Soit la variable <code>a</code> qui alloue 32 bits en mémoire. On veut écrire le nombre 0x02 en mémoire, à l’adresse indiquée par la variable <code>a</code>.</p>
+<p>Effectuez cette action en utilisant <code>R0</code> pour stocker l’adresse de la variable <code>a</code> et <code>R1</code> pour stocker le nombre 0x02.</p>
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+LDR R0, =a 
+MOV R1, #0x02
+STR R1, [R0]
+
+fin
+B fin
+
+SECTION DATA
+a ALLOC32  1
+</pre>
+</div>
+</body>
+</html>

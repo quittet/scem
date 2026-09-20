@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Code et mémoire</h1>
+<p>Exemple pour la séance de révision. Le code multiplie la valeur stockée à l'adresse 0x1000 par 3 et stocke le résultat dans R0.</p>
+
+</div>
+
+<div id="code">SECTION INTVEC
+
+MOV PC, #0x80
+
+; Questions: 
+; 1. À quelle adresse est stockée l’instruction MOV PC, #0x80?
+; 2. Quel est le code binaire de l’instruction MOV R0, #0x1000?
+; 3. À quoi correspondent les 32 bits à partir de l’adresse 0x88 en mémoire?
+; 4. À quelle instruction correspond le code binaire 0xE0800002?
+
+SECTION CODE
+
+MOV R0, #0x1000
+LDR R0, [R0]
+
+MOV R1, #0x3
+MOV R2, R0
+SUBS R1, R1, #0x1
+MOVEQ PC, #0xA0
+ADD R0, R0, R2
+MOV PC, #0x90
+
+fin
+B fin
+
+SECTION DATA
+a ASSIGN32 0x51
+
+</div>
+
+</body>
+</html>

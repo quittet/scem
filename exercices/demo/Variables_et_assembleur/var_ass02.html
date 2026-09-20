@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Accès mémoire avec variable (2)</h1>
+<p>Petit programme pour analyser la façon dont l'assembleur gère les variables. </p>
+
+</div>
+
+<div id="code">SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+; Allouons une variable (adresse 0x80)
+maVariable ASSIGN32 0x1
+
+main
+
+; Questions: 
+; - à quelle adresse se situe cette instruction?
+; - quel est le contenu mémoire (sur 32 bits) à cette adresse?
+; - quel est le contenu mémoire (sur 32 bits) à l'adresse subséquente?
+; - par quoi l'assembleur remplace-t-il cette instruction?
+LDR R0, =maVariable
+
+
+SECTION DATA
+
+
+</div>
+
+<div id="solution"> 
+<h1> Solution </h1>
+<p>Questions et réponses: </p>
+<ul>
+<li>À quelle adresse se situe cette instruction? À l'adresse 0x84 (PC = 0x8C, donc PC - 8 = 0x84).</li>
+<li>Quel est le contenu mémoire (sur 32 bits) à cette adresse? <code>0xE51F0004</code>, soit le code binaire correspondant à l'instruction. </li>
+<li>Quel est le contenu mémoire (sur 32 bits) à l'adresse subséquente? <code>0x00000080</code>, soit l'adresse de <code>maVariable</code>.</li>
+<li>Par quoi l'assembleur remplace-t-il cette instruction? Selon la case "instruction courante", il la remplace par <code>LDR R0, [R15, -0x4]</code>, soit une instruction relative à PC, qui indique de lire le contenu mémoire à l'adresse subséquente (qui contient l'adresse de <code>maVariable</code>)!</li>
+</ul>
+</div>
+</body>
+</html>

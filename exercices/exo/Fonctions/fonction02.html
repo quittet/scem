@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Utilisation</h1>
+<p>Soit la fonction <code>FonctionAddition</code> qui effectue une addition entre 3 registres <code>R0</code>, <code>R1</code>, <code>R2</code> et qui stocke le résultat dans <code>R0</code>.
+Utilisez cette fonction (sans la modifier) pour calculer la somme de <code>0xEE</code>, <code>0x02</code>, <code>0x0F</code> et stockez le résultat dans <code>R3</code>. </p>
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+; Écrivez votre code ici
+
+; Fonction qui additionne trois nombres placés dans R0, R1, et R2
+FonctionAddition
+ADD R0, R0, R1
+ADD R0, R0, R2
+BX LR
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+; Initialisons les registres à utiliser par FonctionAddition
+MOV R0, #0xEE
+MOV R1, #0x02
+MOV R2, #0x0F
+
+; Appelons notre fonction
+BL FonctionAddition
+
+; Plaçons le résultat dans R0.
+MOV R3, R0
+B fin
+
+; Fonction qui additionne trois nombres placés dans R0, R1, et R2
+FonctionAddition
+ADD R0, R0, R1
+ADD R0, R0, R2
+BX LR
+  
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>TP1: Initiation à l'assembleur ARM (code)</h1>
+<h3>Étape 2: code</h3>
+<p>L'onglet « Simulation » ci-haut contient une ébauche de code ainsi que 5 questions. Écrivez votre code sous chacune des questions.</p>
+<p><strong>Important</strong>: Votre code <strong>ne doit pas</strong> contenir d'instructions relatives à <code>PC</code>. Utilisez plutôt les mécanismes d'adressage de variables (<code>LDR R0, =variable</code>, ...) ou les instructions de branchement (<code>B</code>, <code>BEQ</code>, ...) si nécessaire.</p>
+<div class="alert alert-warning">
+<p>Lorsque vous avez terminé, téléchargez tout d'abord votre fichier <code>source.txt</code> sur votre ordinateur grâce au bouton « sauvegarder » dans le simulateur, puis téléversez ce même fichier dans la boîte de dépôt qui est disponible sur le portail des cours.</p>
+</div>
+<a class="anchor" id="menuRessources"></a>
+<h3>Liens importants</h3>
+<ul>
+<li><a href="https://moodle-but.iutbeziers.fr/moodle/pluginfile.php/49735/mod_resource/content/1/manuel-simulateurARM.pdf" target="_blank">Manuel d'utilisateur du simulateur</a></li>
+<li><a href="https://moodle-but.iutbeziers.fr/moodle/pluginfile.php/49736/mod_resource/content/1/arm-instructionset.pdf" target="_blank">Fichier d'information sur les instructions ARM</a></li>
+</ul>
+</div>
+
+
+<div id="code"> 
+; Section de la table des vecteurs d&#039;interruption
+SECTION INTVEC
+
+B main
+
+codeDuTp        ASSIGN32 0x210000EA
+tableauDuTp     ASSIGN32 0xF,0xF0,0xF00,0xF000,0x0
+tableau2DuTp    ASSIGN32 0x5,0x50,0x500,0x5000,0x5,0x0
+
+; Ne pas enlever cette ligne : ${TEST_5_DATA}
+
+; Section du code principal
+SECTION CODE
+
+variableDuTp    ASSIGN32 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF
+
+main
+
+; Question 1
+; Écrivez un programme qui écrit la valeur 0xAB (sur 32 bits) 
+; à l&#039;adresse 0x84 en mémoire.
+;
+; Important: n&#039;utilisez pas d&#039;instructions relatives à PC.
+;
+; Écrivez votre réponse ici: 
+
+
+
+; Ne pas enlever cette ligne: ${TEST_1}
+
+; Question 2
+; Écrivez un programme qui: 
+; 1. Déclare une variable «maVariableAssignee» sur 32 bits et lui assigne 
+;    la valeur 0x12345678. Placez cette variable dans la section DATA ci-bas.
+; 2. Lit cette variable et lui soustrait 0x70.
+; 3. Stocke le résultat dans «maVariableAssignee».
+;
+; Important: 
+; 1. N&#039;utilisez pas d&#039;instructions relatives à PC. 
+; 2. La variable «maVariableAssignee» doit être le premier élément de la 
+;    section DATA 
+;
+; Écrivez votre réponse ici: 
+
+
+; Ne pas enlever cette ligne: ${TEST_2}
+
+; Question 3
+; Écrivez un programme qui: 
+; 1. Déclare une variable «maVariableAllouee» sur 32 bits sans lui attribuer de 
+;    valeur. Placez cette variable dans la section DATA ci-bas, *en-dessous*
+;    de «maVariableAssignee» de la question 2. 
+; 2. Copie le contenu de la mémoire à l&#039;adresse 0 dans cette variable.
+; 
+; Important: n&#039;utilisez pas d&#039;instructions relatives à PC.
+; 
+; Écrivez votre réponse ici: 
+
+
+
+; Ne pas enlever cette ligne: ${TEST_3}
+
+
+; Question 4
+; Écrivez un programme qui: 
+; 1. Charge le contenu de la mémoire à l&#039;adresse 0x0 dans R0
+; 2. Charge le contenu de la mémoire à l&#039;adresse 0x8 dans R1
+; 3. Place 1 dans R7 si le contenu de R0 est égal à celui de R1, 
+;    et 2 s&#039;il ne l&#039;est pas. 
+;
+; Important: n&#039;utilisez pas d&#039;instructions relatives à PC.
+;
+; Écrivez votre réponse ici: 
+
+
+; Ne pas enlever cette ligne: ${TEST_4}
+
+; Question 5
+; Écrivez un programme qui calcule la somme des éléments d&#039;un tableau
+; jusqu&#039;à ce qu&#039;il rencontre la valeur « 0 », ce qui indique la fin du tableau.
+; Le programme stocke ensuite le résultat dans R8. 
+; Important: 
+; 1. Vous *devez* utiliser une boucle. 
+; 2. Pour les branchements, utilisez l&#039;instruction Branch (B, BEQ, etc.)
+;    plutôt que d&#039;affecter une valeur à PC (ex: MOV PC, ...)
+; 3. Votre code doit boucler jusqu&#039;à ce qu&#039;il rencontre la valeur 0. 
+; 4. Testez votre code sur les deux tableaux fournis. La seule modification 
+;    nécessaire devrait être le choix de la variable dans la ligne suivante : 
+
+LDR R0, =tableauDuTp
+; LDR R0, =tableau2DuTp ; retirez le commentaire pour tester avec tableau2DuTp
+
+; Ne pas enlever cette ligne: ${TEST_5_PRE}
+
+; Écrivez votre réponse ici: 
+
+
+
+; Ne pas enlever cette ligne: ${TEST_5}
+
+; Fin du programme
+fin 
+B fin
+
+; Section des données
+SECTION DATA
+; Écrivez vos variables maVariableAssignee et maVariableAllouee ici: 
+
+
+END
+
+</div>
+
+</body>
+</html>

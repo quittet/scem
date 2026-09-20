@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Valeur maximum dans un tableau</h1>
+<p>Trouver la valeur maximum dans <code>mon_tableau</code> en utilisant une boucle. La valeur maximale devrait se retrouver dans <code>R3</code> à la fin du programme.</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+mon_tableau ASSIGN32 0xCAA330B0, 0xE7FA1998, 0x93C2C5DE, 0x9DC73798
+
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+mon_tableau ASSIGN32 0xCAA330B0, 0xE7FA1998, 0x93C2C5DE, 0x9DC73798
+
+main
+LDR R0, =mon_tableau
+LDR R3, [R0]
+MOV R1, #0x04
+boucle
+SUBS R1, R1, #0x01
+BEQ fin
+ADD R0, R0, #0x04
+LDR R2, [R0]
+CMP R2, R3
+MOVGT R3, R2
+B boucle
+  
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+
+
+</div>
+</body>
+</html>

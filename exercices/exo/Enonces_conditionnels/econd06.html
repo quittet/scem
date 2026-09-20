@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Sauter des adresses</h1>
+<p>Écrivez du code assembleur qui sautera les 9 instructions qui se trouveront après celui-ci, peu importe lesquelles, si le nombre contenu dans R4 est négatif.</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+
+SECTION CODE
+
+main
+
+; Mettre une valeur dans R4
+MOV R4, #-1
+MOV R0, #1
+
+; Si R4 est négatif, « sauter » 9 instructions plus loin, 
+; soit au MOV R2, #0x1000
+
+; Écrivez votre code ici
+
+
+
+
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R2, #0x1000
+
+; Ici, R0 devrait être égal à 1
+ASSERT R0=1
+
+fin
+B fin
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+
+SECTION CODE
+
+main
+
+; Mettre une valeur dans R4
+MOV R4, #-1
+MOV R0, #1
+
+; Si R4 est négatif, « sauter » 9 instructions plus loin, 
+; soit au MOV R2, #0x1000
+CMP R4, #0
+ADDLT PC, PC, #32
+
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R0, #0
+MOV R2, #0x1000
+
+; Ici, R0 devrait être égal à 1
+ASSERT R0=1
+
+fin
+B fin
+
+SECTION DATA
+
+</pre>
+
+
+
+</div>
+</body>
+</html>

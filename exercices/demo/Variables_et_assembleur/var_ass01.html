@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Accès mémoire avec variable (1)</h1>
+<p>Petit programme pour analyser la façon dont l'assembleur gère les variables. </p>
+
+</div>
+
+<div id="code">SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+; Allouons une variable (adresse 0x80)
+maVariable ASSIGN32 0x1
+
+main
+
+; Question: par quoi l'assembleur remplace-t-il cette instruction?
+; Indice: regardez dans la case "instruction courante" en haut à droite...
+LDR R0, maVariable
+
+fin 
+B fin
+
+SECTION DATA
+
+</div>
+
+<div id="solution"> 
+<h1> Solution </h1>
+<p>Questions et réponses: </p>
+<ul>
+<li>Par quoi l'assembleur remplace-t-il cette instruction? Selon la case "instruction courante", il la remplace par <code>LDR R0, [R15, -0x0C]</code> , soit un LDR relatif à PC (R15). Pourquoi -0x0C? Car PC contient 0x8C, alors 0x8C - 0xC = 0x80, ce qui est bien l'adresse de <code>maVariable</code>. </li>
+</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Modifications à PC</h1>
+<p>Explorons plusieurs façons de modifier la séquence d'exécution d'un programme via des modifications au registre PC. </p>
+</div>
+
+
+<div id="code">SECTION INTVEC
+
+B main
+
+adresse ASSIGN32 0x9C
+
+SECTION CODE
+
+main
+
+; Qu&#039;est-ce que cette instruction fait?
+MOV PC, #0x88
+MOV R0, #0
+
+; Qu&#039;est-ce que cette instruction fait?
+ADD PC, PC, #-4
+MOV R0, #0
+
+; Qu&#039;est-ce que ces deux instructions font?
+LDR R0, =adresse
+LDR PC, [R0]
+MOV R0, #0
+
+; Qu&#039;est-ce que ces deux instructions font?
+MOV R0, #0
+BX R0
+
+SECTION DATA
+
+</div>
+
+<div id="solution"> 
+<h1> Solution </h1>
+<p>Questions et réponses: </p>
+<ul>
+<li>Qu'est-ce que <code>MOV PC, #0x88</code> fait? On saute à l'adresse 0x88, soit deux instructions plus loin que l'instruction courante (qui est à l'adresse 0x80). </li>
+<li>Qu'est-ce que <code>ADD PC, PC, #-4</code> fait? Elle soustrait 4 à PC, et place le résultat dans PC. La prochaine instruction à être exécutée est donc l'instruction suivante (l'instruction courante + 8 - 4 = l'instruction suivante). </li>
+<li>Qu'est-ce que <code>LDR PC, [R0]</code> fait? La valeur de la mémoire à l'adresse 0x4 (valeur dans R0) est 0x9C, ce qui est deux instructions plus loin. La prochaine instruction à être exécutée est donc deux instructions plus loin. </li>
+<li>Qu'est-ce que <code>MOV R0, #0</code> fait? On saute à l'adresse 0x0, soit à l'instruction <code>B main</code> au tout début du programme. Et on recommence!</li>
+</ul>
+</div>
+</body>
+</html>

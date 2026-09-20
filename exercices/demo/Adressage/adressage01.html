@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Exercice</h1>
+<p>Toutes les étapes de l'exercice dans les notes. Effectuez les étapes pas à pas et suivez la progression comme dans les notes.</p>
+</div>
+
+
+<div id="code"> 
+SECTION INTVEC
+
+B main
+
+
+SECTION CODE
+
+main
+
+MOV R0, #0x1000
+
+LDR R1, [R0]
+LDR R2, [R0, #4]
+LDR R3, [R0, R2]
+LDR R4, [R0, R1, LSL #2]
+LDR R5, [R0, #2]
+
+fin
+B fin
+
+SECTION DATA
+
+tmp ASSIGN32 0x1, 0x4, 0xA, 0xB
+</div>
+
+</body>
+</html>

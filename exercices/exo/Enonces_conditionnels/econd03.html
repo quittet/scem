@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Branchement conditionnel</h1>
+<p>Refaites la même chose que pour l'exercice <a href="http://arm-simulator.iutbeziers.fr:8000/?page=exo&sim=ZXhvL0Vub25jZXNfY29uZGl0aW9ubmVscy9lY29uZDAyLmh0bWw%3D">précédent</a>, mais cette fois-ci avec des branchements. </p>
+<p>Soient les registre <code>R0</code> et <code>R1</code>. Écrivez un programme qui:</p>
+<ol>
+<li>si <code>R1</code> est négatif, place le résultat de <code>R0</code> + <code>R1</code> dans <code>R2</code>; </li>
+<li>si <code>R1</code> est positif, place le résultat de <code>R0</code> - <code>R1</code> dans <code>R2</code>; </li>
+<li>si <code>R1</code> est égal à 0, place <code>R0</code> dans <code>R2</code>.</li>
+</ol>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+; valeurs de test pour R0 et R1 -- modifiez-les!
+MOV R0, #2
+MOV R1, #-1
+
+negatif ; que faire si R1 est (strictement) négatif
+
+
+positif ; que faire si R1 est (strictement) positif)
+
+
+nul     ; que faire si R1 est égal à 0
+
+fin
+
+B fin
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+; valeurs de test pour R1 et R2 -- modifiez-les!
+MOV R0, #2
+MOV R1, #-1
+
+
+; comparaison -- mets à jour les drapeaux de l'ALU
+CMP R1, #0x00
+
+; saute au bon endroit en fonction du résultat de la comparaison
+BLT negatif
+BGT positif
+BEQ nul
+
+negatif ; que faire si R1 est (strictement) négatif
+ADD R2, R0, R1
+B fin
+
+positif ; que faire si R1 est (strictement) positif)
+SUB R2, R0, R1
+B fin
+
+nul     ; que faire si R1 est égal à 0
+MOV R2, R0
+fin
+
+B fin
+
+SECTION DATA
+</pre>
+
+</div>
+</body>
+</html>

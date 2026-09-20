@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Lecture en mémoire</h1>
+<p>Une variable <code>b</code> est déclarée dans la mémoire. Écrivez le code pour stocker la valeur de <code>b</code> dans le registre <code>R0</code>.</p>
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+b ASSIGN32  0xAA
+
+main
+LDR R0, b
+
+fin
+B fin
+
+SECTION DATA
+</pre>
+</div>
+</body>
+</html>

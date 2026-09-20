@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Tableaux avec boucle</h1>
+<p>Revenons à la démonstration sur les tableaux, mais cette fois accédons aux éléments d'un tableau grâce à une boucle. Rappel: il s'agit d'écrire un programme qui copie le contenu d'un tableau <code>source</code> vers un tableau <code>destination</code>. Nous pouvons assumer que nous connaissons à l'avance le nombre d'éléments à copier. </p>
+</div>
+
+
+<div id="code">SECTION INTVEC
+
+B main
+
+source ASSIGN32 0x48, 0x65, 0x6C
+
+SECTION CODE
+
+main
+
+; Chargeons l'adresse de source
+LDR R0, =source
+
+; Chargeons l'adresse de destination
+LDR R1, =destination
+
+; Copions les éléments uns à uns
+; Tout d'abord, nous devrons stocker le nombre d'éléments à copier. 
+; Nous utiliserons le registre R3. 
+
+; Contrairement à l'exemple dans les notes, nous allons décrémenter le 
+; compteur plutôt que de l'incrémenter. Cela nous permettra d'utiliser SUBS
+; pour effectuer la comparaison et mettre à jour le compteur simultanément.
+MOV R3, #3
+
+boucle
+; Vérifions tout d'abord si nous avons terminé 
+; (au cas où 0 éléments devraient être copiés)
+SUBS R3, R3, #1
+BLT finBoucle
+
+; Effectuons la copie de la source vers la destination
+LDR R2, [R0], #4
+STR R2, [R1], #4
+
+; Recommencer
+B boucle
+finBoucle
+
+fin 
+B fin
+
+SECTION DATA
+
+destination ALLOC32 3
+
+</div>
+</body>
+</html>

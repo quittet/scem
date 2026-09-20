@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Comparateur logique</h1>
+<p>Écrivez l’expression représentant un comparateur logique "et" (AND). Définissez les entrées dans <code>R0</code> et <code>R1</code> que vous pouvez initialiser à des valeurs arbitraires de votre choix, et placez le résultat dans <code>R2</code>.</p>
+<p>Essayez différentes valeur de R0 et R1.</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+MOV R0, #0x11
+MOV R1, #0x01
+AND R2, R0, R1
+
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+</div>
+</body>
+</html>

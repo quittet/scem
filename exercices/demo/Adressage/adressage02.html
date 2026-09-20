@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Tableaux avec mode d'adressage</h1>
+<p>Écrivons un programme qui copie le contenu d'un tableau <code>source</code> vers un tableau <code>destination</code>. Cette fois, utilisons l'un des modes d'adressage en ARM qui nous permettra d'éviter d'utiliser des instructions <code>ADD</code> après chaque transfert.</p>
+</div>
+
+<div id="code">SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+
+; Chargeons l'adresse de source
+LDR R0, =source
+
+; Chargeons l'adresse de destination
+LDR R1, =destination
+
+; Copions les éléments uns à uns
+
+; Question: quelle est la valeur de R0 après les deux
+; instructions suivantes? Et R1?
+LDR R2, [R0], #4
+STR R2, [R1], #4
+
+; Question: qu'arriverait-il si on utilisait 
+; LDR R2, [R0, #4]! et STR R2, [R1, #4]! au lieu des
+; deux instructions suivantes?
+LDR R2, [R0], #4
+STR R2, [R1], #4
+
+LDR R2, [R0], #4
+STR R2, [R1], #4
+
+; Hmm... il me semble que ça serait plus simple de faire 
+; une boucle... nous y verrons la semaine prochaine!
+
+fin 
+B fin
+
+SECTION DATA
+
+source ASSIGN32 0x48, 0x65, 0x6C
+destination ALLOC32 3
+ 
+
+</div>
+
+<div id="solution">
+<h1> Solution </h1>
+<p>Questions et réponses: </p>
+<ul>
+<li>Quelle est la valeur de R0 après les deux instructions précédentes? R0 contient la valeur 0x1004 car l'instruction l'a incrémenté après avoir effectué la lecture en mémoire. </li>
+<li>Et R1? R1 contient la valeur 0x1010 car l'instruction l'a également incrémenté après avoir effectué la lecture en mémoire. </li>
+<li>Qu'arriverait-il si on utilisait <code>LDR R2, [R0, #4]!</code> et <code>STR R2, [R1, #4]!</code> au lieu des deux instructions suivantes? On «sauterait» un élément du tableau car l'adresse utilisée pour la lecture en mémoire est R0+4 et non R0 comme l'instruction suivante. </li>
+</ul>
+</div>
+</body>
+</html>

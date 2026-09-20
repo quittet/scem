@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 ARM Simu</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Exemple d'addition</h1>
+<p>Écrivons un programme qui additionne deux valeurs stockées en mémoire:</p>
+	<ul>
+<li>La première valeur est à une adresse de base. </li>
+<li>La seconde valeur est à l’adresse mémoire suivante (après la première valeur).</li>
+<li>Le résultat est écrit dans l’adresse mémoire suivante (après la seconde valeur).</li>
+</ul>
+</div>
+
+<div id="code"> 
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+
+MOV R0, #0x1000   ; Adresse de la première valeur
+LDR R1, [R0]      ; Lecture de la première valeur dans R1
+ADD R0, R0, #4    ; Adresse de la deuxième valeur
+LDR R2, [R0]      ; Lecture de la deuxième valeur dans R2
+ADD R1, R1, R2    ; R1 = R1 + R2
+ADD R0, R0, #4    ; Adresse du résultat
+STR R1, [R0]      ; Écriture du résultat en mémoire
+
+fin
+B fin
+
+SECTION DATA
+
+; Valeurs stockées en mémoire
+premiereValeur ASSIGN32 0x1
+deuxiemeValeur ASSIGN32 0x2
+
+; Résultat (on ne connait pas sa valeur a priori)
+resultat ALLOC32  1
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Soustraction</h1>
+<p>Soit la variable <code>b</code> et la variable <code>a</code> déjà définies dans le code. Écrivez la valeur de <code>b</code> décrémentée de 9 (<code>b</code> - 9) dans la variable <code>a</code>.</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+b ASSIGN32 0xA12F345B
+
+main
+LDR R0, b
+LDR R1, =a
+SUB R0, R0, #9
+STR R0, [R1]
+
+fin
+B fin
+
+SECTION DATA
+a ALLOC32 1
+</pre>
+</div>
+</body>
+</html>

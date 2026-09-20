@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Fonction qui écrit en mémoire</h1>
+<p>Développez la fonction <code>uwotm8</code> qui place le double du nombre contenu dans R1 à l'adresse 4096 en mémoire. Votre fonction doit s'assurer que les registres ne soient pas modifiés pour l'appelant.</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+
+LDR SP, =maPile
+ADD SP, SP, #40
+
+; Par exemple, plaçons la valeur 0x12 dans R1
+MOV R1, #0x12
+
+; Appelons la fonction
+BL uwotm8
+
+; Vérifions qu'il y a bien 0x24 à l'adresse 4096
+ASSERT 0x1000=0x24,0x1001=0,0x1002=0,0x1003=0
+
+fin
+B fin
+
+; Écrivez votre fonction ici
+
+SECTION DATA
+
+tmp ALLOC32 10
+maPile ALLOC32 10
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+
+LDR SP, =maPile
+ADD SP, SP, #40
+
+; Par exemple, plaçons la valeur 0x12 dans R1
+MOV R1, #0x12
+
+; Appelons la fonction
+BL uwotm8
+
+; Vérifions qu'il y a bien 0x24 à l'adresse 4096
+ASSERT 0x1000=0x24,0x1001=0,0x1002=0,0x1003=0
+
+fin
+B fin
+
+; Écrivez votre fonction ici
+uwotm8
+PUSH {R0, R1}
+
+ADD R1, R1, R1
+MOV R0, #0x1000
+STR R1, [R0]
+POP {R0, R1}
+
+BX LR
+
+SECTION DATA
+
+tmp ALLOC32 10
+maPile ALLOC32 10
+</pre>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Comparaison de deux nombres</h1>
+<p>Soient les registres <code>R0</code> et <code>R1</code> contenant chacun un nombre quelconque de votre choix.
+ En utilisant les drapeaux, affectez la valeur 1 à <code>R2</code> si <code>R0</code> et <code>R1</code> sont égaux, sinon affectez-lui la valeur 0. Testez votre code en variant les valeurs des registres. </p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+MOV R1, #0x04
+MOV R0, #0x05
+CMP R1, R0
+MOVEQ R2, #0x01
+MOVNE R2, #0x00 ; (Cette ligne n’est pas obligatoire puisque R2 est à 0 au depart)
+
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+
+
+</div>
+</body>
+</html>

@@ -13,9 +13,10 @@ versions de Python ni des dépendances.
 | `container/requirements.txt` | Dépendances Python épinglées (celles d'upstream + `polib` pour générer les traductions). |
 | `container/http_server.py` | Serveur HTTP (bottle + gevent) qui sert `wsgi.py`, rôle tenu par Apache/mod_wsgi chez upstream. |
 | `container/entrypoint.sh` | Lance le serveur websocket (`mainweb.py`, port 31415) et le serveur HTTP (port 8000). |
+| `container/overlay/` | Fichiers copiés par-dessus `epater/` au build : personnalisations de l'interface (titre de la page). |
 | `container/selftest.py` | Auto-test de bout en bout : assemble et exécute un programme ARM via le websocket. |
 | `Dockerfile`, `docker-compose.yml`, `Makefile` | Construction, lancement et cryogénisation. |
-| `exercices/` | Exercices maison, montés en volume dans le conteneur. |
+| `exercices/` | Cours et exercices de la ressource R106, montés en volume dans le conteneur. |
 
 ## Prérequis
 

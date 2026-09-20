@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Multiplication</h1>
+<p>Développez la fonction <code>Multiplication</code> qui effectue une multiplication entre <code>R0</code> et <code>R1</code> et qui stocke le résultat dans <code>R0</code>. Pour cette fonction, vous ne pouvez pas utiliser <code>MUL</code>. Testez votre programme avec des valeurs différentes. Par exemple, qu'arrive-t-il si le contenu de l'un des deux registres d'entrée est 0?</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+LDR SP, =maPile
+ADD SP, SP, #40
+
+; Préparons deux valeurs à multiplier, par exemple 2 et 5. 
+MOV R1, #2
+MOV R0, #5
+
+; Appel de la fonction
+BL Multiplication
+B fin
+
+; Fonction multiplication (sans MUL)
+Multiplication
+; Écrivez votre code ici. N'oubliez pas de sauvegarder vos registres!
+BX LR
+
+fin
+B fin
+
+SECTION DATA
+maPile ALLOC32 10;
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+LDR SP, =maPile
+ADD SP, SP, #40
+
+; Préparons deux valeurs à multiplier, par exemple 2 et 5. 
+MOV R1, #0x02
+MOV R0, #0x05
+
+; Appel de la fonction
+BL Multiplication
+B fin
+
+; Fonction multiplication (sans MUL)
+Multiplication
+PUSH {R1, R2}
+MOV R2, #0x00
+boucle
+CMP R1, #0x00
+BEQ finfonction
+ADD R2, R2, R0
+SUB R1, R1, #0x01
+B boucle
+
+finfonction
+MOV R0, R2
+POP {R1, R2}
+BX LR
+
+fin
+B fin
+
+
+SECTION DATA
+maPile ALLOC32 10;
+</pre>
+
+</div>
+</body>
+</html>

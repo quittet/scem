@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Meilleur appel de fonction</h1>
+<p>Réglons le cas de la démonstration précédente.</p>
+
+</div>
+<div id="code">SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+
+; Appelons la fonction une première fois
+BL MaFonction
+
+AdresseDeRetour
+MOV R0, #0
+
+; Appelons la fonction une deuxième fois
+BL MaFonction
+MOV R0, #1
+
+B main
+
+
+; Le code de MaFonction commence ici
+MaFonction
+
+MOV R1, #1
+; La fonction est terminée, retournons d'où nous venons
+; Pour cela, utilisons le registre LR (qui a été ajusté par BL)
+BX LR
+
+B main
+
+SECTION DATA
+
+</div>
+</body>
+</html>

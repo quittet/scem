@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Minuteur</h1>
+<p>Un minuteur est un compteur qui calcule un laps de temps spécifié par l’utilisateur. 
+En assumant que le simulateur effectue 10 instructions par seconde, écrivez un programme qui se terminera après un nombre spécifié de secondes. Votre programme doit:</p>
+<ul>
+<li>Utiliser le nombre de secondes dans R0.</li>
+<li>Placer 1 dans R1 lorsque le nombre de secondes s'est écoulé.</li>
+</ul>
+<p>À quel point est-ce que votre compteur est précis? Qu'arrive-t-il si vous modifiez le délai d'exécution des instructions dans le simulateur (voir dans le panneau "configuration")?</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+; placer le nombre de secondes dans R0
+MOV R0, #5
+
+SECTION CODE
+
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+; placer le nombre de secondes dans R0
+MOV R0, #5
+
+; La boucle plus bas utilise deux instructions, et chaque instruction 
+; prend 0.1 secondes. Donc, la boucle prend 0.2 secondes. Effectuer 
+; la boucle 5 fois équivaut à 1 seconde.
+MOV R2, #5
+MUL R3, R0, R2
+
+
+boucle
+SUBS R3, R3, #1
+BNE boucle
+
+; terminé! nous pouvons placer 1 dans R1
+MOV R1, #1
+  
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+</div>
+</body>
+</html>

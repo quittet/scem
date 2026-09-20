@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Adressage en ARM</h1>
+<p>Amusons-nous avec les différents modes d'adressage en ARM.</p>
+</div>
+
+<div id="code">SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+; Question: quelle serait l&#039;adresse de la variable
+; tableau si elle était placée dans cette section?
+
+main    
+; Tout d&#039;abord, commençons par visualiser le contenu de 
+; la mémoire à l&#039;adresse 0x1000
+  
+; Chargeons l&#039;adresse de la variable tableau dans R0
+LDR R0, =tableau  
+
+; Questions:
+; - Quel élément est lu par chacune de ces versions?
+
+; Version 1
+LDR R1, [R0]       
+
+; Version 2
+LDR R2, [R0, #4]
+
+; Version 3
+MOV R5, #4
+LDR R3, [R0, R5]
+
+; Version 4
+LDR R4, [R0], #4   
+
+; Version 5
+LDR R5, [R0, #4]!
+
+; Question: quelle est la différence entre ces deux 
+; dernières instructions?
+
+; Question: qu&#039;est-ce que fait cette dernière instruction?
+LDR R5, [PC, #-8]
+  
+B main          ; Et on recommence!
+
+SECTION DATA
+
+; Question: quelle est l&#039;adresse de la variable tableau?
+tableau ASSIGN32 0x1234, 0x4567, 0x89AB, 0xCDEF
+ 
+
+</div>
+
+<div id="solution"> 
+<h1> Solution </h1>
+<p>Questions et réponses: </p>
+<ul>
+<li>Quelle serait l'adresse de la variable <code>tableau</code> si elle était placée dans cette section? 0x80. </li>
+<li>Quel élément est lu par... la version 1? Le premier élément, soit 0x1234.</li>
+<li>Quel élément est lu par... la version 2? Le second élément, soit 0x4567.</li>
+<li>Quel élément est lu par... la version 3? Le second élément, soit 0x4567.</li>
+<li>Quel élément est lu par... la version 4? Le premier élément, soit 0x1234.</li>
+<li>Quel élément est lu par... la version 5? Le troisième élément, soit 0x89AB.</li>
+<li>Quelle est la différence entre ces deux dernières instructions? La version 4 modifie le contenu de R0 _après_ l'accès mémoire, tandis que la version 5 incrémente R0 de 4 _avant_ d'effectuer l'accès mémoire. </li>
+<li>Qu'est-ce que fait cette dernière instruction? Elle place l'instruction courante (son code binaire) dans R5. </li>
+<li>Quelle est l'adresse de la variable <code>tableau</code>? 0x1000. </li>
+</ul>
+</div>
+</body>
+</html>

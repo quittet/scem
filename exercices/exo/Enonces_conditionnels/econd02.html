@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Soustraction modifiée</h1>
+<p>Soient les registre <code>R0</code> et <code>R1</code>. Écrivez un programme qui:</p>
+<ol>
+<li>si <code>R1</code> est négatif, place le résultat de <code>R0</code> + <code>R1</code> dans <code>R2</code>; </li>
+<li>si <code>R1</code> est positif, place le résultat de <code>R0</code> - <code>R1</code> dans <code>R2</code>; </li>
+<li>si <code>R1</code> est égal à 0, place <code>R0</code> dans <code>R2</code>.</li>
+</ol>
+<p>Pour cet exercice, n'utilisez pas de branchement (l'instruction <code>B</code>).</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+CMP R1, #0x00
+ADDLT R2, R0, R1
+SUBGT R2, R0, R1
+MOVEQ R2, R0
+
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+
+
+</div>
+</body>
+</html>

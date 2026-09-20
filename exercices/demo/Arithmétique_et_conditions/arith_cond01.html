@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Comparaisons</h1>
+<p>Utilisons les instructions <code>CMP</code> et <code>SUBS</code> pour comparer deux nombres et mettre à jour les drapeaux de l'ALU, dans le registre CPSR. Ensuite, utilisons des instructions conditionnelles pour effectuer des opérations en fonction du résultat de la comparaison. </p>
+</div>
+
+
+<div id="code">SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+
+; Plaçons des valeurs dans R0 et R1 (essayez de les modifier)
+MOV R0, #5
+MOV R1, #10
+
+; Comparons R0 et R1
+CMP R0, R1
+
+; Cette instruction est équivalente à CMP R0, R1
+; sauf qu'elle modifie également le contenu de R0
+SUBS R0, R0, R1
+
+; Lorsque la comparaison est effectuée, nous pouvons exécuter des instructions
+; conditionnelles. Ces instructions utilisent les drapeaux de l'ALU pour 
+; déterminer si elles doivent être exécutées ou non. 
+
+; R3 <- R1 seulement si les opérandes sont égales 
+; (EQ = equal, ou si le drapeau Z est égal à 1)
+MOVEQ R3, R1      
+
+; R2 <- R2 + R1 seulement si les opérandes ne sont pas égales 
+; (NE = not equal, ou si le drapeau Z est égal à 0)
+ADDNE R2, R2, R1  
+
+
+B main
+
+SECTION DATA
+</div>
+
+</body>
+</html>

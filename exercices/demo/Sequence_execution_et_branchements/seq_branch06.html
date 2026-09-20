@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>Appel de fonction avec paramètres et pile</h1>
+<p>Préservons le contenu des registres modifiés par une fonction lorsqu'on l'appelle. De plus, pensons à préserver le registre modifié par l'appel d'une fonction. </p>
+</div>
+
+
+<div id="code"> 
+SECTION INTVEC
+
+B main
+
+
+SECTION CODE
+
+main
+
+LDR SP, =maPile    ; Préparons une pile (de 16 octets)
+ADD SP, SP, #16    ; La pile descend, donc il faut commencer à la fin
+
+B debut
+NOP
+
+debut
+MOV R1, #2                 
+PUSH {R0}                 ; Sauvegarde R0
+MOV R0, #8
+BL Triple                 ; Appel de fonction
+MOV R2, R0
+POP {R0}                  ; Restaure R0
+CMP R1, R2
+
+fin
+B fin
+
+; Espace vide pour que le code de la fonction débute à l'adresse 0xC0
+; comme dans les notes.
+tmp2 ALLOC32 5
+
+Triple 
+; paramètre: R0
+; valeur de retour: R0
+PUSH {R1,LR}              ; Sauvegarde R1 et LR
+
+ADD R1, R0, R0            ; Calcule 3*R0 en utilisant des additions.
+ADD R1, R1, R0      
+         
+MOV R0, R1                ; Place résultat dans R0 (valeur de retour)
+POP {R1,LR}               ; Restaure R1 et LR
+BX LR                     ; Fonction terminée
+
+SECTION DATA
+
+maPile ALLOC32 4
+
+</div>
+</body>
+</html>

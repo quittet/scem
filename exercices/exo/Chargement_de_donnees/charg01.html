@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+    <body>
+
+<div id="enonce">
+<h1>Déclaration de variables</h1>
+<p>Déclarez les variables suivantes :</p>
+<ol>
+<li>Une variable <code>a</code> de 8 bits dans la section DATA;</li>
+<li>Une variable <code>b</code> de 32 bits qui a une valeur de 0x00000004 dans la section CODE;</li>
+<li>Une variable <code>tableau</code> de 3 éléments de 32 bits dans la section DATA.</li>
+</ol>
+</div>
+<div id="code">
+SECTION INTVEC
+main
+B main
+
+SECTION CODE
+
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+main
+B main
+
+SECTION CODE
+b ASSIGN32 0x00000004
+
+SECTION DATA
+a ALLOC8 1
+tableau ALLOC32 3
+</pre>
+</div>
+</body>
+</html>

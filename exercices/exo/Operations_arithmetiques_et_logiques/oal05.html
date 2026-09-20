@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Pair vs impair</h1>
+<p> Écrivez du code assembleur qui place dans <code>R0</code> la valeur 1 si <code>R1</code> est pair ou -1 si <code>R1</code> est impair.</p>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+
+SECTION CODE
+
+main
+
+; On place une valeur dans R1
+MOV R1, #2
+
+; Écrivez votre code ici
+
+; R0 devrait contenir 1 si R1 est pair, -1 si impair
+
+fin
+B fin
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+
+SECTION CODE
+
+main
+
+; On place une valeur dans R1
+MOV R1, #2
+
+; Écrivez votre code ici
+TST R1, #1
+MOVEQ R0, #1
+MOVNE R0, #-1
+
+; R0 devrait contenir 1 si R1 est pair, -1 si impair
+
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+
+
+</div>
+</body>
+</html>

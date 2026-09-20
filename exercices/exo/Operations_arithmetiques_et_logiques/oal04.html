@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Décalage</h1>
+<p>Soit la variable <code>a</code> déjà initialisée dans le code. Chargez cette variable dans <code>R0</code>, puis utilisez des opérations de décalage (<code>LSR</code> et <code>LSL</code>) pour placer les valeurs:</p>
+<ul>
+<li><code>0x00004000</code> dans <code>R1</code>;</li>
+<li><code>0x00000800</code> dans <code>R2</code>;</li>
+<li><code>0x00000100</code> dans <code>R3</code>;</li>
+<li><code>0x00000040</code> dans <code>R4</code>;</li>
+<li><code>0x00010000</code> dans <code>R5</code>;</li>
+<li><code>0x00400000</code> dans <code>R6</code>;</li>
+<li><code>0x00080000</code> dans <code>R7</code>;</li>
+<li><code>0x01000000</code> dans <code>R8</code>;</li>
+</ul>
+
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+a ASSIGN32 0x00008000
+
+main
+
+LDR R0, a
+LSR R1, R0, #1
+LSR R2, R0, #4
+LSR R3, R0, #7
+LSR R4, R0, #9
+LSL R5, R0, #1
+LSL R6, R0, #7
+LSL R7, R0, #4
+LSL R8, R0, #9
+
+fin
+B fin 
+
+SECTION DATA
+</pre>
+
+
+
+</div>
+</body>
+</html>

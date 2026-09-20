@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Tableaux</h1>
+<p>Soient deux tableaux, le <code>tableau_lecture</code> contenant des données et le <code>tableau_ecriture</code>, le tableau cible qui doit contenir les données.</p>
+<p>Écrivez un programme qui copie le contenu de <code>tableau_lecture</code> dans le <code>tableau_ecriture</code>, mais avec les données dans le sens inverse.</p>
+</div>
+
+<div id="code">
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+main
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+tableau_lecture ASSIGN32 0x0D, 0x0C, 0x0B, 0x0A
+
+main
+LDR R0, =tableau_lecture
+LDR R1, [R0], #4
+LDR R2, [R0], #4
+LDR R3, [R0], #4
+LDR R4, [R0]
+LDR R0, =tableau_ecriture
+STR R4, [R0], #4
+STR R3, [R0], #4
+STR R2, [R0], #4
+STR R1, [R0]
+
+fin
+B fin
+
+SECTION DATA
+tableau_ecriture ALLOC32 4
+</pre>
+
+Autre solution possible (avec une boucle cette fois). Cette solution est plus compliquée et nécessite une compréhension des branchements et des énoncés conditionnels. 
+
+<pre>
+SECTION INTVEC
+
+B main
+tableau_lecture ASSIGN32 0x0D, 0x0C, 0x0B, 0x0A
+SECTION CODE
+
+main
+
+LDR R0, =tableau_lecture
+LDR R1, =tableau_ecriture
+
+; on commence à la fin du tableau d'écriture, qui contient 4 éléments
+; on incrémente donc l'adresse de base de 12 (3x4 octets)
+ADD R1, R1, #12
+
+; compteur pour savoir quand s'arrêter
+MOV R2, #4
+
+boucle
+LDR R3, [R0], #4  ; lecture de l'élément, incrémentation de l'adresse
+STR R3, [R1], #-4 ; écriture de l'élément, décrémentation de l'adresse
+SUBS R2, R2, #1
+BGT boucle
+
+; terminé
+fin
+B fin
+
+SECTION DATA
+tableau_ecriture ALLOC32 4
+</pre>
+</div>
+</body>
+</html>

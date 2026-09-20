@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulateur ARM</title>
+    </head>
+<body>
+<div id="enonce">
+<h1>Appel</h1>
+<p>La fonction <code>FonctionDuJour</code> initialise les registres <code>R0</code> et <code>R1</code>. Écrivez un programme qui utilise tout d'abord cette fonction (sans la modifier) pour initialiser les registres. Ensuite, votre fonction doit soustraire <code>R1</code> à <code>R0</code> puis stocker le résultat dans <code>R0</code>.</p>
+
+</div>
+
+<div id="code">
+
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+; Écrivez votre code ici
+
+
+; Fonction du jour
+FonctionDuJour
+MOV R0, #0xFF
+MOV R1, #0xAA
+BX LR
+
+SECTION DATA
+
+</div>
+<div id="solution">
+<pre>
+SECTION INTVEC
+
+B main
+
+SECTION CODE
+
+main
+; Appel de la fonction
+BL FonctionDuJour
+; Soustraction
+SUB R0, R0, R1
+B fin
+
+; Fonction du jour
+FonctionDuJour
+MOV R0, #0xFF
+MOV R1, #0xAA
+BX LR
+
+fin
+B fin
+
+SECTION DATA
+</pre>
+
+</div>
+</body>
+</html>

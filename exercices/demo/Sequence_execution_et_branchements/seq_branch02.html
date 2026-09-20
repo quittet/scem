@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>R106 Simu ARM</title>
+</head>
+<body>
+<div id="enonce">
+<h1>If/else avec branchements</h1>
+<p>Grâce aux branchements avec étiquette, il est facile d'implémenter des énoncés if/else comme dans un langage de haut niveau. </p>
+</div>
+
+
+<div id="code">SECTION INTVEC
+
+B main
+
+maVar ASSIGN32 0x4
+
+SECTION CODE
+
+main
+
+LDR	R0, maVar   ; Met la valeur de maVar dans R0
+CMP	R0, #4      ; Change les drapeaux comme R0-4
+
+BNE	PasEgal     ; NE = « Not Equal »
+
+; exécute la tâche 1 (nous sommes dans le « if »)
+MOV R1, #1
+
+B Continue
+
+PasEgal
+
+; exécute la tâche 2 (nous sommes dans le « else »)
+MOV R1, #2
+
+Continue
+
+; le programme continue...
+fin 
+B fin
+
+
+SECTION DATA
+</div>
+</body>
+</html>
