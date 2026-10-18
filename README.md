@@ -16,6 +16,7 @@ versions de Python ni des dépendances.
 | `container/overlay/` | Fichiers copiés par-dessus `epater/` au build : personnalisations de l'interface (titre de la page). |
 | `container/selftest.py` | Auto-test de bout en bout : assemble et exécute un programme ARM via le websocket. |
 | `Dockerfile`, `docker-compose.yml`, `Makefile` | Construction, lancement et cryogénisation. |
+| `docker-compose.exam.yml` | Surcharge utilisée par `make exam` : monte les exercices masqués à la place des vrais. |
 | `exercices/` | Cours et exercices de la ressource R106, montés en volume dans le conteneur. |
 
 ## Prérequis
@@ -27,6 +28,7 @@ Docker (avec le plugin `compose`) et `make`. Rien d'autre.
 ```sh
 make build   # construit l'image scem/epater:latest
 make run     # lance le conteneur en arrière-plan
+make exam    # idem, en mode examen (voir plus bas)
 make test    # vérifie que HTTP et websocket fonctionnent
 make logs    # journaux
 make stop    # arrêt
@@ -130,6 +132,24 @@ pouvant les consulter soi-même :
 
 Sans `privepass.txt`, les exercices listés dans `prive.txt` restent simplement
 invisibles pour tout le monde.
+
+## Mode examen
+
+```sh
+make exam    # au lieu de make run
+```
+
+Lance le même conteneur sans aucun contenu pédagogique : chaque page HTML de
+`exercices/` (accueil, démos, exercices formatifs, TP) est remplacée par
+« [mode examen] ». Le Makefile génère pour cela une copie masquée de
+l'arborescence dans `dist/examen/`, que `docker-compose.exam.yml` monte à la
+place de `exercices/` ; le vrai dossier n'est ni modifié ni monté.
+
+Les noms de sections (noms de dossiers) restent visibles dans les menus, et
+ouvrir un exercice donne un éditeur vide : pour composer, utiliser
+« Simulation libre », qui garde le squelette de code par défaut.
+
+Retour au mode normal : `make stop && make run`.
 
 ## Cryogénisation : déployer ailleurs sans reconstruire
 

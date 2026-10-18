@@ -1,0 +1,7 @@
+# Mode examen (make exam) : à combiner avec docker-compose.yml.
+# Remplace le volume des exercices par une copie générée par le Makefile,
+# où chaque page HTML ne contient plus que « [mode examen] ».
+services:
+  epater:
+    volumes:
+      - ./dist/examen:/app/epater/exercices:ro
